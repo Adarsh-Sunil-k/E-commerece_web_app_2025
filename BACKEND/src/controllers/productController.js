@@ -84,8 +84,33 @@ const createProduct = async (req, res) => {
   }
 };
 
+  //get All Products
+
+  const getProducts = async (req,res)=>{
+    try {
+      const products = await Product
+      .find({})
+      .select("-photo")
+      .limit(12)
+      .sort({createdAt:-1});
+      res.status(200).send({
+        success:true,
+        message:"All products",
+        products,
+        totalCount:products.length,
+      })
+    } catch (error) {
+      res.status(500).send({
+        success:false,
+        message:"Error in Getting Products",
+        error:error.message,
+      })
+    }
+  }
+
 const productController = {
   createProduct,
+  getProducts,
 };
 
 export default productController;
