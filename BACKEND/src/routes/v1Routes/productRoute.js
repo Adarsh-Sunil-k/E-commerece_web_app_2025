@@ -8,5 +8,6 @@ const productRouter = express.Router();
 
 productRouter.post("/create",requireSignIn,isAdmin,upload.single('image'),productController.createProduct);
 productRouter.get("/getProducts",productController.getProducts);
+productRouter.get("/getProduct/:slug",productController.getSingleProduct);
 
 export default productRouter;
